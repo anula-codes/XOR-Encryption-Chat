@@ -1,335 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XOR Encryption Chat</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #FCFAF8;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .header {
-            background: #FCFAF8;
-            color: #333;
-            padding: 30px;
-            text-align: center;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .content {
-            padding: 30px;
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        .section h2 {
-            color: #333;
-            font-size: 18px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section h2::before {
-            content: '';
-            width: 4px;
-            height: 20px;
-            background: #667eea;
-            border-radius: 2px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            color: #555;
-            font-size: 14px;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 14px;
-            transition: all 0.3s;
-            font-family: inherit;
-        }
-
-        input[type="text"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        button {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(51, 51, 51, 0.3);
-            background: #555;
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .output-box {
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 15px;
-            min-height: 60px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: #333;
-            word-break: break-all;
-        }
-
-        .output-box.encrypted {
-            color: #e74c3c;
-            font-weight: 600;
-        }
-
-        .output-box.decrypted {
-            color: #27ae60;
-            font-weight: 600;
-        }
-
-        .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-size: 13px;
-            color: #1976d2;
-        }
-
-        .message-log {
-            max-height: 300px;
-            overflow-y: auto;
-            margin-top: 15px;
-        }
-
-        .message-item {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-left: 3px solid #667eea;
-        }
-
-        .message-item .timestamp {
-            font-size: 11px;
-            color: #999;
-            margin-bottom: 5px;
-        }
-
-        .message-item .text {
-            font-size: 13px;
-            color: #333;
-        }
-
-        .message-item .encrypted-text {
-            font-size: 12px;
-            color: #e74c3c;
-            font-family: 'Courier New', monospace;
-            margin-top: 5px;
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>XOR Cipher Lab — Understand Symmetric Encryption</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>XOR Encryption Chat</h1>
-            <p>Encrypt and decrypt messages using XOR cipher</p>
-        </div>
+<main>
 
-        <div class="content">
-            <div class="section">
-                <h2>Configuration</h2>
-                <div class="input-group">
-                    <label for="key">Encryption Key:</label>
-                    <input type="text" id="key" value="SecretKey123" placeholder="Enter encryption key">
-                </div>
-            </div>
+<!-- Header -->
+<header>
+<div class="header-title">
+<h1>XOR Cipher</h1>
+</div>
+<p class="subtitle">An interactive sandbox for understanding how symmetric XOR ciphers actually work, bit by bit.
+   <br>Educational tool · not production security 
+</p>
 
-            <div class="section">
-                <h2>Send Message</h2>
-                <div class="input-group">
-                    <label for="plaintext">Your Message:</label>
-                    <textarea id="plaintext" placeholder="Type your message here..."></textarea>
-                </div>
-                <button onclick="encryptAndSend()">Encrypt & Send</button>
-            </div>
+</header>
 
-            <div class="section">
-                <h2>Encrypted Message (to be sent)</h2>
-                <div class="output-box encrypted" id="encrypted-output">Encrypted message will appear here...</div>
-            </div>
+<!-- Configuration Card -->
+<section class="glass-card">
+<div class="section-header">
+<div class="section-header-left">
+<span class="material-symbols-outlined">vpn_key</span>
+<h2>Configuration</h2>
+</div>
+<span class="meta-label">Runs entirely in your browser</span>
+</div>
+<div class="field-group">
+<div>
+<label class="field-label">Repeating Key</label>
+<div class="input-wrap">
+<input id="key-input" type="password" value="SecretKey123"/>
+<button class="toggle-visibility" onclick="toggleKeyVisibility()">
+<span class="material-symbols-outlined" id="key-toggle-icon">visibility_off</span>
+</button>
+</div>
+</div>
+<div class="coverage-row">
+<div class="coverage-left">
+<span class="cov-label">Key Coverage</span>
+<div class="coverage-bars" id="coverage-bars">
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+</div>
+</div>
+<p class="coverage-text" id="coverage-text">Type a key and a message to see how often the key repeats.</p>
+</div>
+</div>
+</section>
 
-            <div class="section">
-                <h2>Received & Decrypted Message</h2>
-                <div class="output-box decrypted" id="decrypted-output">Decrypted message will appear here...</div>
-            </div>
+<!-- Workspace -->
+<section class="glass-card">
+<div class="section-header">
+<div class="section-header-left">
+<span class="material-symbols-outlined">edit_note</span>
+<h3>Message Input</h3>
+</div>
+<span class="meta-label" id="char-count">0 Chars</span>
+</div>
+<textarea class="custom-scrollbar" id="message-input" placeholder="Type a message to encrypt..."></textarea>
+<button class="btn-primary" onclick="encryptAndSend()" style="margin-top: 16px;">
+<span class="material-symbols-outlined">bolt</span>
+Encrypt Message
+</button>
+</section>
 
-            <div class="section">
-                <h2>Message History</h2>
-                <div class="message-log" id="message-log">
-                    <p style="text-align: center; color: #999; padding: 20px;">No messages yet</p>
-                </div>
-            </div>
+<!-- Results -->
+<div class="results-grid">
+<section class="glass-card">
+<div class="section-header">
+<div class="section-header-left">
+<span class="material-symbols-outlined">lock_open</span>
+<h3>Ciphertext (hex)</h3>
+</div>
+<button class="icon-btn" onclick="copyToClipboard('encrypted-output')">
+<span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+</button>
+</div>
+<div class="output-box output-cipher custom-scrollbar italic" id="encrypted-output">
+Encrypted output will appear here...
+</div>
+</section>
+<section class="glass-card">
+<div class="section-header">
+<div class="section-header-left">
+<span class="material-symbols-outlined" style="color: var(--secondary);">check_circle</span>
+<h3>Decrypted (round-trip)</h3>
+</div>
+</div>
+<div class="output-box output-verify custom-scrollbar italic" id="decrypted-output">
+Applying the same key twice restores the original text.
+</div>
+</section>
+</div>
 
-            <div class="info-box">
-                <strong>How it works:</strong><br>
-                1. Type your message and click "Encrypt & Send"<br>
-                2. Message is encrypted using XOR cipher with your key<br>
-                3. Encrypted data is shown in hex format (simulating server encryption)<br>
-                4. Message is automatically decrypted to verify the process<br>
-                <br>
-                <strong>Note:</strong> This simulates the client-server interaction in the browser. In the actual C application, the server performs the encryption.
-            </div>
-        </div>
-    </div>
+<!-- Bitwise Breakdown -->
+<section class="glass-card">
+<div class="section-header">
+<div class="section-header-left">
+<span class="material-symbols-outlined">memory</span>
+<h3>Bitwise Breakdown</h3>
+</div>
+<span class="meta-label">First character</span>
+</div>
+<div class="bit-breakdown" id="bit-breakdown">
+<span class="placeholder">Encrypt a message to see the XOR operation on its first character.</span>
+</div>
+</section>
 
-    <script>
-        function xorEncryptDecrypt(text, key) {
-            let result = '';
-            for (let i = 0; i < text.length; i++) {
-                result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-            }
-            return result;
-        }
+<!-- Cipher Log -->
+<section class="glass-card">
+<div class="section-header">
+<div class="section-header-left">
+<span class="material-symbols-outlined">history</span>
+<h3>Cipher Log</h3>
+</div>
+<span class="meta-label">This session only</span>
+</div>
+<div class="log-wrap custom-scrollbar" id="message-log">
+<p class="log-empty">No messages yet</p>
+</div>
+</section>
 
-        function toHex(str) {
-            let hex = '';
-            for (let i = 0; i < str.length; i++) {
-                const byte = str.charCodeAt(i).toString(16).padStart(2, '0');
-                hex += byte + ' ';
-            }
-            return hex.trim();
-        }
+<!-- How it works / where it breaks -->
+<section class="glass-card briefing">
+<div class="briefing-glow"></div>
+<div class="briefing-content">
+<div class="briefing-title-row">
+<div class="briefing-icon">
+<span class="material-symbols-outlined">info</span>
+</div>
+<h4>How XOR works — and where it breaks down</h4>
+</div>
+<div class="briefing-grid">
+<div class="briefing-col">
+<p class="eyebrow">01. Input processing</p>
+<p class="body">Every character becomes an 8-bit binary number before any math happens.</p>
+</div>
+<div class="briefing-col">
+<p class="eyebrow">02. XOR ciphering</p>
+<p class="body">Exclusive OR runs between each message bit and the matching key bit, repeating the key as needed.</p>
+</div>
+<div class="briefing-col">
+<p class="eyebrow">03. Round-trip check</p>
+<p class="body">XOR is its own inverse, so applying the identical key again restores the plaintext exactly.</p>
+</div>
+</div>
+<div class="briefing-footnote">
+<p><span class="warn-word">Why this isn't secure on its own:</span> once a key is shorter than the message, it repeats — and repeating XOR keystreams leak patterns to frequency analysis, the same weakness that broke the Vigenère cipher centuries ago. There's also no authentication, so a flipped ciphertext bit is never detected. Real systems use standards like AES-GCM or ChaCha20-Poly1305, which add both key-stream unpredictability and integrity checks.</p>
+<p class="fine-print">All computation happens client-side in this browser tab. Nothing is sent anywhere.</p>
+</div>
+</div>
+</section>
 
-        function encryptAndSend() {
-            const plaintext = document.getElementById('plaintext').value;
-            const key = document.getElementById('key').value;
-
-            if (!plaintext) {
-                alert('Please enter a message to encrypt');
-                return;
-            }
-
-            if (!key) {
-                alert('Please enter an encryption key');
-                return;
-            }
-
-            // Encrypt the message
-            const encrypted = xorEncryptDecrypt(plaintext, key);
-            const encryptedHex = toHex(encrypted);
-
-            // Display encrypted message
-            document.getElementById('encrypted-output').textContent = encryptedHex;
-
-            // Simulate server receiving and sending back - decrypt it
-            const decrypted = xorEncryptDecrypt(encrypted, key);
-            document.getElementById('decrypted-output').textContent = decrypted;
-
-            // Add to message log
-            addToLog(plaintext, encryptedHex, decrypted);
-
-            // Clear input
-            document.getElementById('plaintext').value = '';
-        }
-
-        function addToLog(original, encrypted, decrypted) {
-            const log = document.getElementById('message-log');
-            
-            // Remove "no messages" text if it exists
-            if (log.querySelector('p')) {
-                log.innerHTML = '';
-            }
-
-            const messageItem = document.createElement('div');
-            messageItem.className = 'message-item';
-            
-            const timestamp = new Date().toLocaleTimeString();
-            
-            messageItem.innerHTML = `
-                <div class="timestamp">${timestamp}</div>
-                <div class="text"><strong>Original:</strong> ${original}</div>
-                <div class="encrypted-text"><strong>Encrypted (hex):</strong> ${encrypted}</div>
-                <div class="text" style="color: #27ae60;"><strong>Decrypted:</strong> ${decrypted}</div>
-            `;
-            
-            log.insertBefore(messageItem, log.firstChild);
-        }
-
-        // Allow Enter key to send (Ctrl+Enter for newline)
-        document.getElementById('plaintext').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.ctrlKey && !e.shiftKey) {
-                e.preventDefault();
-                encryptAndSend();
-            }
-        });
-    </script>
+<footer>
+<div class="links">
+<a href="#">HOW THIS WORKS</a>
+<a href="#">WHY XOR ISN'T ENOUGH</a>
+<a href="#">SOURCE</a>
+</div>
+<div>XOR CIPHER LAB · A CRYPTOGRAPHY LEARNING SANDBOX</div>
+</footer>
+</main>
+<script src="app.js"></script>
 </body>
 </html>
